@@ -1,0 +1,27 @@
+{
+  "name": "playwright-opencart-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:regression": "playwright test",
+    "test:ui": "playwright test tests/ui --grep @UI",
+    "test:api": "playwright test tests/api --grep @API",
+    "test:visual": "playwright test tests/visual --grep @VISUAL",
+    "test:mocks": "playwright test tests/mocks --grep @MOCK",
+    "allure:gen": "npx allure generate ./allure-results --clean",
+    "allure:open": "npx allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "allure-commandline": "^2.36.0",
+    "allure-playwright": "^3.4.5",
+    "exceljs": "^4.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

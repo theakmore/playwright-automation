@@ -1,0 +1,12 @@
+node_modules
+.env
+
+test-results
+playwright-report
+
+allure-results
+allure-report
+
+storage
+
+.DS_Store
