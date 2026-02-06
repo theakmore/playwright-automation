@@ -12,7 +12,8 @@ export default defineConfig({
 
   reporter: [
     ['line'],
-    ['allure-playwright']
+    ['allure-playwright'] ,
+    // ["./reporters/aiFailureReporter"] //uncomment this line to enable custom AI failure reporter
   ],
 
   use: {

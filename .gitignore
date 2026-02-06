@@ -10,3 +10,7 @@ allure-report
 storage
 
 .DS_Store
+
+# ignore all ai reports except samples
+ai-reports/*
+!ai-reports/sample-*.md
