@@ -1,6 +1,8 @@
 # 🎭 Playwright Automation Framework (TypeScript) – AutomationExercise
 
-A complete **industry-style End-to-End Automation Framework** built using **Playwright + TypeScript** to automate UI + API workflows, with support for **data-driven testing (Excel/JSON)**, **network mocking**, **visual testing**, and **Jenkins CI pipeline**.
+A complete industry-style End-to-End Automation Framework built using Playwright + TypeScript to automate UI + API workflows.
+
+The framework includes advanced capabilities like AI-based failure analysis (local LLM powered), network mocking, visual regression testing, data-driven execution (Excel/JSON), and fully automated CI validation using Jenkins and GitHub Actions pipelines.
 
 ---
 
@@ -9,8 +11,10 @@ A complete **industry-style End-to-End Automation Framework** built using **Play
 - Playwright Test Runner
 - TypeScript
 - Allure Reporting
-- ExcelJS (Excel Data Driven Testing)
-- Jenkins CI
+- ExcelJS (Data Driven Testing)
+- Ollama (Local LLM for AI Failure Analysis)
+- Jenkins CI Pipeline
+- GitHub Actions CI
 - GitHub (Version Control)
 
 ---
@@ -39,29 +43,49 @@ A complete **industry-style End-to-End Automation Framework** built using **Play
 - Home page snapshot baseline comparison
 - Products page snapshot baseline comparison
 
+### 🤖 AI Failure Analysis
+- Automatically analyzes failed tests using local LLM (Ollama – Llama3)
+- Generates root cause + fix suggestion
+- Creates markdown report per failed test in `ai-reports/`
+- Helps debugging without manually reading logs
+
 ---
 
 ## 🏗️ Framework Folder Structure
 
 ```bash
-playwright-automationexercise-e2e/
+playwright-automation/
 │
 ├── tests/
-│   ├── ui/               # UI Tests
-│   ├── api/              # API Tests
-│   ├── mocks/            # Network Mocking Tests
-│   ├── visual/           # Visual Tests
-│   └── setup/            # StorageState setup (login once)
+│   ├── ui/               # UI test cases
+│   ├── api/              # API tests (APIRequestContext)
+│   ├── mocks/            # Network interception tests
+│   ├── visual/           # Visual regression tests
+│   └── setup/            # storageState login setup
 │
-├── pages/                # Page Object Model (POM)
+├── pages/                # Page Object Model classes
 ├── fixtures/             # Custom fixtures
-├── utils/                # Utilities (Excel, API clients, generators)
-├── test-data/            # JSON/Excel test data
+├── utils/                # Helpers (Excel, API clients, generators)
+├── test-data/            # JSON & Excel test data
+│
+├── ai/                   # AI integration (local LLM)
+│   ├── ollamaClient.ts
+│   └── failureAnalyzer.ts
+│
+├── reporters/
+│   └── aiFailureReporter.ts   # Playwright custom reporter (AI analysis)
+│
+├── ai-reports/           # Generated AI failure analysis reports
+├── assets/               # Screenshots used in README
+│
+├── .github/workflows/    # GitHub Actions CI pipeline
+│   └── playwright.yml
 │
 ├── playwright.config.ts
 ├── Jenkinsfile
 ├── package.json
 └── README.md
+
 
 ## 🚀 How to Run Tests
 
@@ -98,21 +122,29 @@ npm run allure:open
 ![Allure Test Details](assets/allure-test-details.png)
 
 ### 🧠 Key Framework Highlights:
-✅ Page Object Model (POM) implementation
+✅ Page Object Model (POM) architecture
 ✅ Data-Driven Testing using Excel + JSON
 ✅ Direct login using storageState session handling
 ✅ API automation using APIRequestContext
-✅ Industry mocking using fulfill / continue / abort
+✅ Network mocking using fulfill / continue / abort
 ✅ Visual Regression baseline comparisons
-✅ Jenkins Pipeline with suite selection parameter
-✅ Retry, parallel execution, artifacts generation
+✅ AI-based failure root cause analysis (local LLM)
+✅ Jenkins parameterized pipeline execution
+✅ GitHub Actions automatic commit/PR validation
+✅ Parallel execution + retries + artifact reporting
 
-###🔁 Jenkins Integration
-A parameterized Jenkins pipeline is added using Jenkinsfile:
-Select Suite: UI / API / Visual / Mock / Regression
-Run tests automatically
-Generate Allure Report
-Archive artifacts
+### 🔁 CI/CD Integration
+
+**Jenkins**
+- Parameterized pipeline execution (UI/API/Regression)
+- Allure report generation & artifact archiving
+
+**GitHub Actions**
+- Runs automatically on every push & pull request
+- Installs environment and executes Playwright tests
+- Uploads Playwright HTML report for debugging
+- Prevents merging broken code
+
 
 ###🔗 Application Under Test (AUT)
 UI: https://automationexercise.com/
